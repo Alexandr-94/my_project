@@ -1,7 +1,7 @@
 import requests
 import json
 
-
+#
 col = ('Cur_Abbreviation','Cur_Name','Cur_OfficialRate','Cur_Scale','Date')
 s = requests.Session()
 r = s.get("https://www.nbrb.by/api/exrates/rates?periodicity=0")
