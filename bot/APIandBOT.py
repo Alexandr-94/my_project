@@ -5,8 +5,7 @@ from token_bot import token
 from datetime import datetime
 from telebot import types
 from api_belarusbank import get_exchange_rates
-
-
+# API беларусьбанка.
 def get_exchange_rates_conversion(currencies: list, direstion: str, city: str) -> str:
     result = ''
     for currency in currencies:
@@ -15,7 +14,7 @@ def get_exchange_rates_conversion(currencies: list, direstion: str, city: str) -
         r = json.loads(r.text)
         result += f'{currency.upper()}: {r[0][f"{currency.upper()}_{direstion.lower()}"]} \n'
     return result
-
+# берем необходимую нам валюту и указываем покупку или продажу.
 if __name__ == '__main__':
     get_exchange_rates_conversion(['usd_eur', 'usd_rub', 'rub_eur'], 'out', 'минск')
     get_exchange_rates_conversion(['usd_eur', 'usd_rub', 'rub_eur'], 'in', 'минск')
@@ -34,15 +33,17 @@ if __name__ == '__main__':
     get_exchange_rates(['usd', 'eur', 'rub'], 'out', 'минск')
     get_exchange_rates(['usd', 'eur', 'rub'], 'in', 'минск')
 
-
+# Активация бота.
 def telegram_bot(token):
     bot = telebot.TeleBot(token)
+    # создаем кнопки.
     @bot.message_handler(commands=['start'])
     def hello_bot(message):
         bot.send_message(message.from_user.id, "Приветствую мой друг")
         keyboard = telebot.types.ReplyKeyboardMarkup(True)
         keyboard.row('Да', 'Нет')
         bot.send_message(message.chat.id, 'Тебя интерует курс валют?', reply_markup=keyboard)
+    # условия по курсам.
     @bot.message_handler(content_types=['text'])
     def get_text_messages(message):
 
@@ -67,7 +68,7 @@ def telegram_bot(token):
                                                    "ей-богу как маленький!")
         else:
             bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
-
+    # логика обработки по нажатию на пнопки
     @bot.callback_query_handler(func=lambda call: True)
     def callback_worker(call):
 
