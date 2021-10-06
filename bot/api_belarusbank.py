@@ -1,6 +1,6 @@
 import requests
 import json
-
+#
 def get_exchange_rates(currencies: list, direstion: str, city: str) -> str:
     result = ''
     for currency in currencies:
