@@ -14,7 +14,7 @@ def get_exchange_rates_conversion(currencies: list, direstion: str, city: str) -
         r = json.loads(r.text)
         result += f'{currency.upper()}: {r[0][f"{currency.upper()}_{direstion.lower()}"]} \n'
     return result
-# берем необходимую нам валюту и указываем покупку или продажу.
+# берем необходимую нам конверсию валюты и указываем покупку или продажу.
 if __name__ == '__main__':
     get_exchange_rates_conversion(['usd_eur', 'usd_rub', 'rub_eur'], 'out', 'минск')
     get_exchange_rates_conversion(['usd_eur', 'usd_rub', 'rub_eur'], 'in', 'минск')
@@ -28,7 +28,7 @@ def get_exchange_rates(currencies: list, direstion: str, city: str) -> str:
         r = json.loads(r.text)
         result += f'{currency.upper()}: {r[0][f"{currency.upper()}_{direstion.lower()}"]} \n'
     return result
-
+# берем необходимую нам валюту и указываем покупку или продажу.
 if __name__ == '__main__':
     get_exchange_rates(['usd', 'eur', 'rub'], 'out', 'минск')
     get_exchange_rates(['usd', 'eur', 'rub'], 'in', 'минск')
